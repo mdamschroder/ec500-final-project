@@ -1,0 +1,28 @@
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.current_bills_wrapper {
+    display: grid;
+    grid-template-rows: auto auto;
+}
+
+a {
+    color: rgb(48, 131, 127);
+    padding: 5px;
+}
+
+thead > tr {
+    background-color: rgb(48, 131, 127);
+    color: white;
+}
+
+th, td {
+    padding: 6px 10px;
+    text-align: left;
+}
+
+h3 {
+    margin: auto;
+}

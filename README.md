@@ -13,3 +13,4 @@
 
 ## Features:
 - Can list all current senators and house members
+- Can list all recent bills for senate and house

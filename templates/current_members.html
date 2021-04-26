@@ -4,13 +4,14 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='styles/current_members.css') }}">
         <title>Legislator Examinator</title>
     </head>
-    <body class='current_members'>
+    <body>
+        <p><a href='/'>Home</a></p>
         <h1>The Legislator Examinator</h1>
         <h2>Current Members of Congress</h2>
         <span class='current_members_wrapper'>
-            <span class='member-group'>
+            <span>
                 <h3>Senate</h3>
-                <table class='members'>
+                <table>
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -19,7 +20,7 @@
                         </tr>
                     </thead>
                     {% for senator in senate %}
-                            <tr class='member'>
+                            <tr>
                                 <td><a href={{senator.url}} target='_blank'>{{senator.first_name}} {{senator.last_name}}</a></td>
                                 <td>{{senator.state}}</td>
                                 <td>{{senator.party}}</td>
@@ -27,9 +28,9 @@
                     {% endfor %}
                 </table>
             </span>
-            <span class='member-group'>
+            <span>
                 <h3>House</h3>
-                <table class='members'>
+                <table>
                     <thead>
                         <tr>
                             <th>First Name</th>
@@ -38,7 +39,7 @@
                         </tr>
                     </thead>
                     {% for house in house %}
-                        <tr class='member'>
+                        <tr>
                             <td><a href={{house.url}} target='_blank'>{{house.first_name}} {{house.last_name}}</a></td>
                             <td>{{house.state}}</td>
                             <td>{{house.party}}</td>

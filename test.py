@@ -1,5 +1,6 @@
 import unittest
 from get_current_members import get_senators, get_house
+from get_bills import get_bills
 
 class TestApp(unittest.TestCase):
     #=============================
@@ -13,6 +14,17 @@ class TestApp(unittest.TestCase):
         #----- Testing the get_house function
         res = get_house()
         self.assertEqual(res[0]['chamber'], "House")
+    #=============================
+    #====     BILLS TESTS     ====
+    #=============================
+    def test_002_GetSenateBills(self):
+        #----- Testing the get_bills function for senate bills
+        res = get_bills('senate')
+        self.assertEqual(res['chamber'], "Senate")
+    def test_003_GetHouseBills(self):
+        #----- Testing the get_bills function for house bills
+        res = get_bills('house')
+        self.assertEqual(res['chamber'], "House")
 
 def suite():
     suite = unittest.TestSuite()

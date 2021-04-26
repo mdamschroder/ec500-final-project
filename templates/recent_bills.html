@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/recent_bills.css') }}">
+        <title>Legislator Examinator</title>
+    </head>
+    <body>
+        <p><a href='/'>Home</a></p>
+        <h1>The Legislator Examinator</h1>
+        <h2>Recent Bills</h2>
+        <span class='current_bills_wrapper'>
+            <span>
+                <h3>Senate</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th width='40%'>Latest Major Action</th>
+                        </tr>
+                    </thead>
+                    {% for bill in senate_bills %}
+                            <tr>
+                                <td><a href={{bill.govtrack_url}} target='_blank'>{{bill.title}}</a></td>
+                                <td>{{bill.latest_major_action}}</td>
+                            </tr>
+                    {% endfor %}
+                </table>
+            </span>
+            <span>
+                <h3>House</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th width='40%'>Latest Major Action</th>
+                        </tr>
+                    </thead>
+                    {% for bill in house_bills %}
+                            <tr>
+                                <td><a href={{bill.govtrack_url}} target='_blank'>{{bill.title}}</a></td>
+                                <td>{{bill.latest_major_action}}</td>
+                            </tr>
+                    {% endfor %}
+                </table>
+            </span>
+        </span>
+    </body>
+</html>
