@@ -1,5 +1,5 @@
 import unittest
-import get_senators from get_current_members
+from get_current_members import get_senators, get_house
 
 class TestApp(unittest.TestCase):
     #=============================
