@@ -8,11 +8,11 @@ class TestApp(unittest.TestCase):
     def test_000_GetSenate(self):
         #----- Testing the get_senators function
         res = get_senators()
-        self.assertEqual(res['chamber'], "Senate")
+        self.assertEqual(res[0]['chamber'], "Senate")
     def test_001_GetHouse(self):
         #----- Testing the get_house function
         res = get_senators()
-        self.assertEqual(res['chamber'], "House")
+        self.assertEqual(res[0]['chamber'], "House")
 
 def suite():
     suite = unittest.TestSuite()
