@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 flask = "*"
 flask-restful = "*"
+requests = "*"
+python-congress = "*"
 
 [dev-packages]
 

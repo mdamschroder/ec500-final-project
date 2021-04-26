@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/homepage.css') }}">
+        <title>Legislator Examinator</title>
+    </head>
+    <body class='current_members'>
+        <h1>The Legislator Examinator</h1>
+        <h2>Current Members of Congress</h2>
+        <span class='current_members_wrapper'>
+            <ul>
+                {% for senator in senate %}
+                    <li>{{senator.first_name}} {{senator.last_name}}</li>
+                {% endfor %}
+            </ul>
+        </span>
+    </body>
+</html>
