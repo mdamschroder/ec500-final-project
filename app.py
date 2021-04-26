@@ -17,4 +17,4 @@ def homepage():
 def current_members():
     house_members = get_house()
     senate_members = get_senators()
-    return render_template("current_members.html", house=house_members, senate=senate_members)
+    return render_template("current_members.html", house=house_members[0]['members'], senate=senate_members[0]['members'])
