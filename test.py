@@ -11,7 +11,7 @@ class TestApp(unittest.TestCase):
         self.assertEqual(res[0]['chamber'], "Senate")
     def test_001_GetHouse(self):
         #----- Testing the get_house function
-        res = get_senators()
+        res = get_house()
         self.assertEqual(res[0]['chamber'], "House")
 
 def suite():

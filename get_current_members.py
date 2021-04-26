@@ -10,5 +10,3 @@ def get_house():
     members = congress.members.filter('house')
     print("House Grabbed")
     return(members)
-
-get_senators()
