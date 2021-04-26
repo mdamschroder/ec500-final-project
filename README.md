@@ -11,4 +11,4 @@
 3) Then, run `flask run` and navigate to [the application](http://127.0.0.1:5000/)
 
 ## Features:
-- Can list all current senators
+- Can list all current senators and house members

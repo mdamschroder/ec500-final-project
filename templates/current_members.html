@@ -1,18 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles/homepage.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/current_members.css') }}">
         <title>Legislator Examinator</title>
     </head>
     <body class='current_members'>
         <h1>The Legislator Examinator</h1>
         <h2>Current Members of Congress</h2>
         <span class='current_members_wrapper'>
-            <ul>
-                {% for senator in senate %}
-                    <li>{{senator.first_name}} {{senator.last_name}}</li>
-                {% endfor %}
-            </ul>
+            <span class='member-group'>
+                <h3>Senate</h3>
+                <table class='members'>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>State</th>
+                        <th>Party</th>
+                    </tr>
+                    {% for senator in senate %}
+                        <tr>
+                            <td>{{senator.first_name}}</td>
+                            <td>{{senator.last_name}}</td>
+                            <td>{{senator.state}}</td>
+                            <td>{{senator.party}}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </span>
+            <span class='member-group'>
+                <h3>House</h3>
+                <table class='members'>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>State</th>
+                        <th>Party</th>
+                    </tr>
+                    {% for house in house %}
+                        <tr>
+                            <td>{{house.first_name}}</td>
+                            <td>{{house.last_name}}</td>
+                            <td>{{house.state}}</td>
+                            <td>{{house.party}}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </span>
         </span>
     </body>
 </html>
