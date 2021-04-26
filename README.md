@@ -3,6 +3,7 @@
 ## Technologies Used:
 ### - Flask
 ### - [congress-api](https://projects.propublica.org/api-docs/congress-api/)
+### - Python package for CI / CD using unittest and coverage
 
 
 ## How to run:
