@@ -11,35 +11,35 @@
             <span class='member-group'>
                 <h3>Senate</h3>
                 <table class='members'>
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>State</th>
-                        <th>Party</th>
-                    </tr>
-                    {% for senator in senate %}
+                    <thead>
                         <tr>
-                            <td>{{senator.first_name}}</td>
-                            <td>{{senator.last_name}}</td>
-                            <td>{{senator.state}}</td>
-                            <td>{{senator.party}}</td>
+                            <th>Name</th>
+                            <th>State</th>
+                            <th>Party</th>
                         </tr>
+                    </thead>
+                    {% for senator in senate %}
+                            <tr class='member'>
+                                <td><a href={{senator.url}} target='_blank'>{{senator.first_name}} {{senator.last_name}}</a></td>
+                                <td>{{senator.state}}</td>
+                                <td>{{senator.party}}</td>
+                            </tr>
                     {% endfor %}
                 </table>
             </span>
             <span class='member-group'>
                 <h3>House</h3>
                 <table class='members'>
-                    <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>State</th>
-                        <th>Party</th>
-                    </tr>
-                    {% for house in house %}
+                    <thead>
                         <tr>
-                            <td>{{house.first_name}}</td>
-                            <td>{{house.last_name}}</td>
+                            <th>First Name</th>
+                            <th>State</th>
+                            <th>Party</th>
+                        </tr>
+                    </thead>
+                    {% for house in house %}
+                        <tr class='member'>
+                            <td><a href={{house.url}} target='_blank'>{{house.first_name}} {{house.last_name}}</a></td>
                             <td>{{house.state}}</td>
                             <td>{{house.party}}</td>
                         </tr>
