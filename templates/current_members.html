@@ -71,6 +71,15 @@
                 <option value="R">Republican</option>
                 <option value="other">Other</option>
             </select>
+            <label for="sort">Sort By:</label>
+            <select name="sort" id="sort">
+                <option value="">Last Name (Default)</option>
+                <option value="party">Party</option>
+                <option value="date_of_birth">Age</option>
+                <option value="votes_with_party_pct">Votes w/ Party Percentage</option>
+                <option value="missed_votes_pct">Missed Vote Percentage</option>
+                <option value="seniority">Seniority</option>
+            </select>
             <input type="submit" value="Filter">
         </form>
 
@@ -83,6 +92,18 @@
                             <th>Name</th>
                             <th>State</th>
                             <th>Party</th>
+                            {% if sort_by == "date_of_birth" %}
+                                <th>Date of Birth</th>
+                            {% endif %}
+                            {% if sort_by == "votes_with_party_pct" %}
+                                <th>Votes w/ Party</th>
+                            {% endif %}
+                            {% if sort_by == "missed_votes_pct" %}
+                                <th>Missed Votes</th>
+                            {% endif %}
+                            {% if sort_by == "seniority" %}
+                                <th>Seniority</th>
+                            {% endif %}
                         </tr>
                     </thead>
                     {% for senator in senate %}
@@ -90,6 +111,18 @@
                                 <td><a href={{senator.url}} target='_blank'>{{senator.first_name}} {{senator.last_name}}</a></td>
                                 <td>{{senator.state}}</td>
                                 <td>{{senator.party}}</td>
+                                {% if sort_by == "date_of_birth" %}
+                                    <td>{{senator.date_of_birth}}</td>
+                                {% endif %}
+                                {% if sort_by == "votes_with_party_pct" %}
+                                    <td>{{senator.votes_with_party_pct}}%</td>
+                                {% endif %}
+                                {% if sort_by == "missed_votes_pct" %}
+                                    <td>{{senator.missed_votes_pct}}%</td>
+                                {% endif %}
+                                {% if sort_by == "seniority" %}
+                                    <td>{{senator.seniority}}</td>
+                                {% endif %}
                             </tr>
                     {% endfor %}
                 </table>
@@ -99,9 +132,21 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>First Name</th>
+                            <th>Name</th>
                             <th>State</th>
                             <th>Party</th>
+                            {% if sort_by == "date_of_birth" %}
+                                <th>Date of Birth</th>
+                            {% endif %}
+                            {% if sort_by == "votes_with_party_pct" %}
+                                <th>Votes w/ Party</th>
+                            {% endif %}
+                            {% if sort_by == "missed_votes_pct" %}
+                                <th>Missed Votes</th>
+                            {% endif %}
+                            {% if sort_by == "seniority" %}
+                                <th>Seniority</th>
+                            {% endif %}
                         </tr>
                     </thead>
                     {% for house in house %}
@@ -109,6 +154,18 @@
                             <td><a href={{house.url}} target='_blank'>{{house.first_name}} {{house.last_name}}</a></td>
                             <td>{{house.state}}</td>
                             <td>{{house.party}}</td>
+                            {% if sort_by == "date_of_birth" %}
+                                <td>{{house.date_of_birth}}</td>
+                            {% endif %}
+                            {% if sort_by == "votes_with_party_pct" %}
+                                <td>{{house.votes_with_party_pct}}%</td>
+                            {% endif %}
+                            {% if sort_by == "missed_votes_pct" %}
+                                <td>{{house.missed_votes_pct}}%</td>
+                            {% endif %}
+                            {% if sort_by == "seniority" %}
+                                <td>{{house.seniority}}</td>
+                            {% endif %}
                         </tr>
                     {% endfor %}
                 </table>

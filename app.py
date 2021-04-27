@@ -3,7 +3,7 @@
 
 from flask import Flask, request, render_template, redirect, json, url_for
 from flask_restful import Resource, Api
-from get_current_members import get_house, get_senators, filter_members
+from get_current_members import get_house, get_senators, filter_members, sort_members
 from get_bills import get_bills
 app = Flask(__name__)
 CONGRESS_API_KEY = 'fTgijhbaKjHp3PMYYv8lBR45m16pI1pbgdBedAWB'
@@ -19,6 +19,7 @@ def current_members():
 
     state = request.args.get("state")
     party = request.args.get("party")
+    sort_by = request.args.get("sort")
 
     # Get members
     house_members = get_house()
@@ -28,7 +29,12 @@ def current_members():
     house_members = filter_members(house_members, state, party)
     senate_members = filter_members(senate_members, state, party)
 
-    return render_template("current_members.html", house=house_members, senate=senate_members)
+    # Sort members
+    house_members = sort_members(house_members, sort_by)
+    senate_members = sort_members(senate_members, sort_by)
+
+
+    return render_template("current_members.html", house=house_members, senate=senate_members, sort_by=sort_by)
 
 @app.route('/get_bills')
 def recent_bills():

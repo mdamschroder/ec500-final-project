@@ -17,7 +17,7 @@ def filter_members(members, state, party):
     if state:
         results = list(filter(lambda x: x['state'] == state, members[0]['members']))
     else:
-        results = members[0]['members']
+        results = members[0]['members'] 
 
     # Filter by party
     if party:
@@ -30,4 +30,22 @@ def filter_members(members, state, party):
     results = list(filter(lambda x: x['in_office'] == True, results))
 
     return results
+
+def sort_members(members, sort_by):
+
+    # Remove members without key
+    if sort_by:
+        for member in members:
+            if sort_by not in member:
+                members.remove(member)
+
+    if sort_by:
+        if sort_by == "seniority":
+            members.sort(key=lambda x: int(x[sort_by]), reverse=True)
+        elif sort_by == "missed_votes_pct":
+            members.sort(key=lambda x: x[sort_by], reverse=True)
+        else:
+            members.sort(key=lambda x: x[sort_by])
+
+    return members
 
