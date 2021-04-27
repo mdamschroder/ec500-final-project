@@ -49,3 +49,7 @@ def sort_members(members, sort_by):
 
     return members
 
+
+def get_member(id):
+
+    return congress.members.get(id)

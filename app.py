@@ -3,7 +3,7 @@
 
 from flask import Flask, request, render_template, redirect, json, url_for
 from flask_restful import Resource, Api
-from get_current_members import get_house, get_senators, filter_members, sort_members
+from get_current_members import get_house, get_senators, filter_members, sort_members, get_member
 from get_bills import get_bills
 app = Flask(__name__)
 CONGRESS_API_KEY = 'fTgijhbaKjHp3PMYYv8lBR45m16pI1pbgdBedAWB'
@@ -33,8 +33,26 @@ def current_members():
     house_members = sort_members(house_members, sort_by)
     senate_members = sort_members(senate_members, sort_by)
 
-
     return render_template("current_members.html", house=house_members, senate=senate_members, sort_by=sort_by)
+
+############# *** MEMBER PAGE *** #############
+@app.route('/member/<id>')
+def member_info(id=None):
+
+    info = get_member(id)
+    
+    # Collect voting data for party line voting graph
+    data = "";
+    for role in info['roles']:
+        if 'votes_with_party_pct' in role:
+            data+=role['congress']
+            data+=','
+            data+=str(role['votes_with_party_pct'])
+            data+=','
+    data = data[:len(data) - 1]
+
+    return render_template("member.html", info=info, votes=data, len=len(info['roles']))
+
 
 @app.route('/get_bills')
 def recent_bills():

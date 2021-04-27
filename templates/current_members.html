@@ -108,7 +108,7 @@
                     </thead>
                     {% for senator in senate %}
                             <tr>
-                                <td><a href={{senator.url}} target='_blank'>{{senator.first_name}} {{senator.last_name}}</a></td>
+                                <td><a href='/member/{{senator.id}}'>{{senator.first_name}} {{senator.last_name}}</a></td>
                                 <td>{{senator.state}}</td>
                                 <td>{{senator.party}}</td>
                                 {% if sort_by == "date_of_birth" %}
@@ -151,7 +151,7 @@
                     </thead>
                     {% for house in house %}
                         <tr>
-                            <td><a href={{house.url}} target='_blank'>{{house.first_name}} {{house.last_name}}</a></td>
+                            <td><a href='/member/{{house.id}}'>{{house.first_name}} {{house.last_name}}</a></td>
                             <td>{{house.state}}</td>
                             <td>{{house.party}}</td>
                             {% if sort_by == "date_of_birth" %}

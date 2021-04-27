@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart', 'Line'] });
+    google.charts.setOnLoadCallback(drawPieChart);
+    google.charts.setOnLoadCallback(drawLineChart);
+
+    // Draw the chart and set the chart values
+    function drawPieChart() {
+        var i;
+
+        var party = Math.round('{{ info.roles[0].total_votes }}' * '{{ info.roles[0].votes_with_party_pct }}' / 100);
+        var notParty = Math.round('{{ info.roles[0].total_votes }}' * '{{ info.roles[0].votes_against_party_pct }}' / 100);
+        var data = google.visualization.arrayToDataTable([
+            ['Alignment', 'Votes'],
+            ['With Party', party],
+            ['Against Party', notParty],
+        ]);
+
+        // Optional; add a title and set the width and height of the chart
+        var options = { 'title': 'Votes in Current Session', 'width': 550, 'height': 400 };
+
+        // Display the chart
+        var chart = new google.visualization.PieChart(document.getElementById('pieChart'));
+        chart.draw(data, options);
+    }
+
+    function drawLineChart() {
+
+        var votes = '{{ votes }}';
+        votes = votes.split(",");
+
+        var name = '{{ info.first_name }}' + ' ' + '{{ info.last_name }}'
+        var data = new google.visualization.DataTable();
+        var d = [];
+
+        data.addColumn('number', 'Session of Congress');
+        data.addColumn('number', name);
+        for (i = 0; i < votes.length / 2; i++) {
+            d.push([parseInt(votes[2*i]), parseFloat(votes[2*i+1])])
+        }
+        data.addRows(d);
+        var options = { 'title': 'Party Line Voting Across All Sessions', 'width': 900, 'height': 500 };
+        var chart = new google.charts.Line(document.getElementById('lineChart'));
+        chart.draw(data, google.charts.Line.convertOptions(options));
+    }
+</script>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/member.css') }}">
+    <title>Legislator Examinator</title>
+</head>
+<body>
+    <p><a href='/'>Home</a></p>
+    <p><a href='/current_members'>Return to Members Page</a></p>
+    <h2 style="text-align: center">{{info.first_name}} {{info.last_name}}</h2>
+    <span>
+        <img src="https://theunitedstates.io/images/congress/225x275/{{info.id}}.jpg" />
+        <br />
+        <b>State:&emsp;</b>{{info.roles[0].state}}<br />
+        <b>Party:&emsp;</b>{{info.current_party}}<br />
+        {% if info.roles[0].title != "Representative" %}
+            {% if info.roles[0].title != "Senator" %}
+                <b>Title:&emsp;</b>{{info.roles[0].title}}<br />
+            {% endif %}
+        {% endif %}
+        <b>Date of Birth:&emsp;</b>{{info.date_of_birth}}<br />
+        <b>Chamber:&emsp;</b>{{info.roles[0].chamber}}<br />
+        <b>Seniority:&emsp;</b>{{info.roles[0].seniority}}<br />
+        <b>Start Date:&emsp;</b>{{info.roles[len-1].start_date}}<br />
+        <b>Next Election:&emsp;</b>{{info.roles[0].next_election}}<br />
+    </span>
+    <span class='committees_wrapper'>
+        <span>
+            <h3>Current Committees</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Committee</th>
+                        <th>Title</th>
+                        <th>Side</th>
+                        <th>Party Rank</th>
+                    </tr>
+                </thead>
+                {% for committee in info.roles[0].committees %}
+                <tr>
+                    <td>{{committee.name}}</td>
+                    <td>{{committee.title}}</td>
+                    {% if committee.side == "minority" %}
+                        <td>Minority</td>
+                    {% endif %}
+                    {% if committee.side == "majority" %}
+                        <td>Majority</td>
+                    {% endif %}
+                    <td>{{committee.rank_in_party}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </span>
+    </span>
+    <div id="pieChart"></div>
+    <div id="lineChart"></div>
+
+</body>
+</html>

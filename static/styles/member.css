@@ -1,0 +1,39 @@
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.committees_wrapper {
+    display: grid;
+    grid-template-rows: auto auto;
+}
+
+a {
+    color: rgb(48, 131, 127);
+    padding: 5px;
+}
+
+thead > tr {
+    background-color: rgb(48, 131, 127);
+    color: white;
+}
+
+th, td {
+    padding: 6px 10px;
+    text-align: left;
+}
+
+h3 {
+    margin: auto;
+}
+
+.box {
+    margin: auto;
+    position: relative;
+    border-radius: 4px;
+    padding: 10px;
+    border: 1px solid blue;
+    background-color: white;
+    align-items: center;
+    margin: auto;
+}
