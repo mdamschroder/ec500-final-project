@@ -4,7 +4,7 @@
 from flask import Flask, request, render_template, redirect, json, url_for
 from flask_restful import Resource, Api
 from get_current_members import get_house, get_senators, filter_members, sort_members, get_member
-from get_bills import get_bills
+from get_bills import get_bills, sort_bills
 app = Flask(__name__)
 CONGRESS_API_KEY = 'fTgijhbaKjHp3PMYYv8lBR45m16pI1pbgdBedAWB'
 
@@ -56,6 +56,25 @@ def member_info(id=None):
 ############# *** THE BILLS PAGE *** #############
 @app.route('/get_bills')
 def recent_bills():
+
+    party = request.args.get("party")
+    sort_by = request.args.get("sort")
+
+    # Get bills
     house_bills = get_bills('house')
     senate_bills = get_bills('senate')
-    return render_template("recent_bills.html", house_bills=house_bills['bills'], senate_bills=senate_bills['bills'])
+
+    house_bills = house_bills['bills']
+    senate_bills = senate_bills['bills']
+
+    # Filter bills
+    if party:
+        house_bills = list(filter(lambda x: x['sponsor_party'] == party, house_bills))
+        senate_bills = list(filter(lambda x: x['sponsor_party'] == party, senate_bills))
+
+    # Sort bills
+    house_bills = sort_bills(house_bills, sort_by)
+    senate_bills = sort_bills(senate_bills, sort_by)
+
+
+    return render_template("recent_bills.html", house_bills=house_bills, senate_bills=senate_bills, sort_by=sort_by)

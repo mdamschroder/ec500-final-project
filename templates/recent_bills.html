@@ -8,20 +8,61 @@
         <p><a href='/'>Home</a></p>
         <h1>The Legislator Examinator</h1>
         <h2>Recent Bills</h2>
+        <form>
+            <label for="party">Party:</label>
+            <select name="party" id="party">
+                <option value="">Any</option>
+                <option value="D">Democrat</option>
+                <option value="R">Republican</option>
+            </select>
+            <label for="sort">Sort By:</label>
+            <select name="sort" id="sort">
+                <option value="">Latest Action Date (Default)</option>
+                <option value="sponsor_party">Party</option>
+                <option value="committees">Committee</option>
+                <option value="introduced_date">Date Introduced</option>
+            </select>
+            <input type="submit" value="Filter">
+        </form>
         <span class='current_bills_wrapper'>
             <span>
                 <h3>Senate</h3>
                 <table>
                     <thead>
                         <tr>
-                            <th>Title</th>
-                            <th width='40%'>Latest Major Action</th>
+                            <th width="55%">Title</th>
+                            <th width='35%'>Latest Major Action</th>
+                            {% if sort_by == "" %}
+                                <th>Latest Major Action Date</th>
+                            {% endif %}
+                            {% if sort_by == "sponsor_party" %}
+                                <th>Sponsor Party</th>
+                            {% endif %}
+                            {% if sort_by == "committees" %}
+                                <th>Committee</th>
+                            {% endif %}
+                            {% if sort_by == "introduced_date" %}
+                                <th>Date Introduced</th>
+                            {% endif %}
+
                         </tr>
                     </thead>
                     {% for bill in senate_bills %}
                             <tr>
                                 <td><a href={{bill.govtrack_url}} target='_blank'>{{bill.title}}</a></td>
                                 <td>{{bill.latest_major_action}}</td>
+                                {% if sort_by == "" %}
+                                    <td>{{bill.latest_major_action_date}}</td>
+                                {% endif %}
+                                {% if sort_by == "sponsor_party" %}
+                                    <td>{{bill.sponsor_party}}</td>
+                                {% endif %}
+                                {% if sort_by == "committees" %}
+                                    <td>{{bill.committees}}</td>
+                                {% endif %}
+                                {% if sort_by == "introduced_date" %}
+                                    <td>{{bill.introduced_date}}</td>
+                                {% endif %}
                             </tr>
                     {% endfor %}
                 </table>
@@ -31,15 +72,39 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Title</th>
-                            <th width='40%'>Latest Major Action</th>
+                            <th width="55%">Title</th>
+                            <th width='35%'>Latest Major Action</th>
+                            {% if sort_by == "" %}
+                                <th>Latest Major Action Date</th>
+                            {% endif %}
+                            {% if sort_by == "sponsor_party" %}
+                                <th>Sponsor Party</th>
+                            {% endif %}
+                            {% if sort_by == "committees" %}
+                                <th>Committee</th>
+                            {% endif %}
+                            {% if sort_by == "introduced_date" %}
+                                <th>Date Introduced</th>
+                            {% endif %}
                         </tr>
                     </thead>
                     {% for bill in house_bills %}
-                            <tr>
-                                <td><a href={{bill.govtrack_url}} target='_blank'>{{bill.title}}</a></td>
-                                <td>{{bill.latest_major_action}}</td>
-                            </tr>
+                        <tr>
+                            <td><a href={{bill.govtrack_url}} target='_blank'>{{bill.title}}</a></td>
+                            <td>{{bill.latest_major_action}}</td>
+                            {% if sort_by == "" %}
+                                <td>{{bill.latest_major_action_date}}</td>
+                            {% endif %}
+                            {% if sort_by == "sponsor_party" %}
+                                <td>{{bill.sponsor_party}}</td>
+                            {% endif %}
+                            {% if sort_by == "committees" %}
+                                <td>{{bill.committees}}</td>
+                            {% endif %}
+                            {% if sort_by == "introduced_date" %}
+                                <td>{{bill.introduced_date}}</td>
+                            {% endif %}
+                        </tr>
                     {% endfor %}
                 </table>
             </span>
