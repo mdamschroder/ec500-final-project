@@ -45,7 +45,6 @@ def member_info(id=None):
     name = info['first_name'] + ' ' + info['last_name']
     headlines = get_news(name)
     headlines = headlines['articles'][0:3]
-    print(headlines)
     # Collect voting data for party line voting graph
     data = "";
     for role in info['roles']:

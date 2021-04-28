@@ -77,7 +77,7 @@
         {% for article in headlines %}
             <span class='news-card'>
                 <p>Source: {{article.source.name}}</p>
-                <p>Title: <a href={{article.url}}>{{article.title}}</a></p>
+                <p>Title: <a href={{article.url}} target='_blank'>{{article.title}}</a></p>
             </span>
         {% endfor %}
     </span>
