@@ -8,6 +8,7 @@ flask = "*"
 flask-restful = "*"
 requests = "*"
 python-congress = "*"
+newsapi-python = "*"
 
 [dev-packages]
 

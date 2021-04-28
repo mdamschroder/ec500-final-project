@@ -5,6 +5,8 @@ from flask import Flask, request, render_template, redirect, json, url_for
 from flask_restful import Resource, Api
 from get_current_members import get_house, get_senators, filter_members, sort_members, get_member
 from get_bills import get_bills, sort_bills
+from get_news import get_news
+
 app = Flask(__name__)
 CONGRESS_API_KEY = 'fTgijhbaKjHp3PMYYv8lBR45m16pI1pbgdBedAWB'
 
@@ -40,7 +42,10 @@ def current_members():
 def member_info(id=None):
 
     info = get_member(id)
-    
+    name = info['first_name'] + ' ' + info['last_name']
+    headlines = get_news(name)
+    headlines = headlines['articles'][0:3]
+    print(headlines)
     # Collect voting data for party line voting graph
     data = "";
     for role in info['roles']:
@@ -51,7 +56,7 @@ def member_info(id=None):
             data+=','
     data = data[:len(data) - 1]
 
-    return render_template("member.html", info=info, votes=data, len=len(info['roles']))
+    return render_template("member.html", info=info, votes=data, len=len(info['roles']), headlines=headlines)
 
 ############# *** THE BILLS PAGE *** #############
 @app.route('/get_bills')

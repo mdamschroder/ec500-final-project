@@ -72,6 +72,15 @@
         <div><b>Start Date:&emsp;</b>{{info.roles[len-1].start_date}}<br /></div>
         <div><b>Next Election:&emsp;</b>{{info.roles[0].next_election}}<br /></div>
     </span>
+    <h3 style='margin: auto; margin-top: 5vh; text-align: center;'>{{info.first_name}} {{info.last_name}} in recent news</h3>
+    <span class='member-news'>
+        {% for article in headlines %}
+            <span class='news-card'>
+                <p>Source: {{article.source.name}}</p>
+                <p>Title: <a href={{article.url}}>{{article.title}}</a></p>
+            </span>
+        {% endfor %}
+    </span>
     <span class='committees_wrapper'>
         <span>
             <h3>Current Committees</h3>

@@ -67,3 +67,22 @@ h3 {
     margin-top: 5vh;
     margin-left: 20vw;
 }
+
+.member-news {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 5px;
+    justify-content: center;
+}
+
+.news-card {
+    display: grid;
+    grid-template-rows: auto auto;
+    background-color:rgb(161, 243, 238);
+    border: 2px solid rgb(48, 131, 127);
+    color: rgb(48, 131, 127);
+    margin: auto;
+    margin-right: 5px;
+    padding: 5px;
+    border-radius: 12px;
+}

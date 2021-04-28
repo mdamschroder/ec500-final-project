@@ -3,6 +3,7 @@
 ## Technologies Used:
 ### - Flask
 ### - [congress-api](https://projects.propublica.org/api-docs/congress-api/)
+### - [newsapi](https://newsapi.org/)
 ### - Python package for CI / CD using unittest and coverage
 
 
@@ -14,4 +15,5 @@
 ## Features:
 - Can list all current senators and house members
 - Can provide information about each member, such as their seniority, committees, and party line voting percentages
+- Can provide 3 top headlines for each member
 - Can list all recent, active bills for senate and house
