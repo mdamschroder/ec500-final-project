@@ -53,7 +53,7 @@ def member_info(id=None):
 
     return render_template("member.html", info=info, votes=data, len=len(info['roles']))
 
-
+############# *** THE BILLS PAGE *** #############
 @app.route('/get_bills')
 def recent_bills():
     house_bills = get_bills('house')

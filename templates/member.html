@@ -50,25 +50,27 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/member.css') }}">
     <title>Legislator Examinator</title>
 </head>
-<body>
-    <p><a href='/'>Home</a></p>
-    <p><a href='/current_members'>Return to Members Page</a></p>
+<body class='member-page'>
+    <span class='header-row'>
+        <p><a href='/'>Home</a></p>
+        <p><a href='/current_members'>Return to Members Page</a></p>
+    </span>
     <h2 style="text-align: center">{{info.first_name}} {{info.last_name}}</h2>
-    <span>
+    <span class='member-card'>
         <img src="https://theunitedstates.io/images/congress/225x275/{{info.id}}.jpg" />
         <br />
-        <b>State:&emsp;</b>{{info.roles[0].state}}<br />
-        <b>Party:&emsp;</b>{{info.current_party}}<br />
+        <div><b>State:&emsp;</b>{{info.roles[0].state}}<br /></div>
+        <div><b>Party:&emsp;</b>{{info.current_party}}<br /></div>
         {% if info.roles[0].title != "Representative" %}
             {% if info.roles[0].title != "Senator" %}
-                <b>Title:&emsp;</b>{{info.roles[0].title}}<br />
+                <div><b>Title:&emsp;</b>{{info.roles[0].title}}<br /></div>
             {% endif %}
         {% endif %}
-        <b>Date of Birth:&emsp;</b>{{info.date_of_birth}}<br />
-        <b>Chamber:&emsp;</b>{{info.roles[0].chamber}}<br />
-        <b>Seniority:&emsp;</b>{{info.roles[0].seniority}}<br />
-        <b>Start Date:&emsp;</b>{{info.roles[len-1].start_date}}<br />
-        <b>Next Election:&emsp;</b>{{info.roles[0].next_election}}<br />
+        <div><b>Date of Birth:&emsp;</b>{{info.date_of_birth}}<br /></div>
+        <div><b>Chamber:&emsp;</b>{{info.roles[0].chamber}}<br /></div>
+        <div><b>Seniority:&emsp;</b>{{info.roles[0].seniority}}<br /></div>
+        <div><b>Start Date:&emsp;</b>{{info.roles[len-1].start_date}}<br /></div>
+        <div><b>Next Election:&emsp;</b>{{info.roles[0].next_election}}<br /></div>
     </span>
     <span class='committees_wrapper'>
         <span>
@@ -98,8 +100,8 @@
             </table>
         </span>
     </span>
-    <div id="pieChart"></div>
-    <div id="lineChart"></div>
+    <div class='chart' id="pieChart"></div>
+    <div class='chart' id="lineChart"></div>
 
 </body>
 </html>

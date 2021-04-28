@@ -6,6 +6,8 @@ table, th, td {
 .committees_wrapper {
     display: grid;
     grid-template-rows: auto auto;
+    justify-content: center;
+    margin-top: 5vh;
 }
 
 a {
@@ -36,4 +38,32 @@ h3 {
     background-color: white;
     align-items: center;
     margin: auto;
+}
+
+.member-card {
+    display: grid;
+    grid-template-rows: auto;
+    justify-content: center;
+    background-color: rgb(70, 189, 183);
+    width: 60vw;
+    border: 2px solid rgb(48, 131, 127);
+    padding: 10px;
+    margin: auto;
+    color: white;
+    border-radius: 12px;
+}
+
+.header-row {
+    display: grid;
+    grid-template-columns: 10vw auto;
+}
+
+.member-page {
+    justify-content: center;
+}
+
+.chart {
+    justify-content: center;
+    margin-top: 5vh;
+    margin-left: 20vw;
 }
