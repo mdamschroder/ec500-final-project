@@ -13,4 +13,5 @@
 
 ## Features:
 - Can list all current senators and house members
-- Can list all recent bills for senate and house
+- Can provide information about each member, such as their seniority, committees, and party line voting percentages
+- Can list all recent, active bills for senate and house
