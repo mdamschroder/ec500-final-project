@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart', 'Line'] });
+    google.charts.setOnLoadCallback(drawDW_S);
+    google.charts.setOnLoadCallback(drawDW_H);
+    google.charts.setOnLoadCallback(drawDW_All);
+    function drawDW_S() {
+        var dw_s = '{{ senate }}';
+        dw_s = dw_s.split(",");
+
+        var d = [];
+
+        d.push(['Congress Member', 'DW-Nominate Score']);
+        for (i = 0; i < dw_s.length / 2; i++) {
+            d.push([dw_s[2*i], parseFloat(dw_s[2 * i + 1])]);
+        }
+        var data = google.visualization.arrayToDataTable(d);
+        var options = {
+            'title': 'Senate DW-Nominate Scores (Left-Right Distribution)', 'legend': { 'position': 'none' }, 'hAxis': {
+                'viewWindow': { 'max': 1.0, 'min': -1.0 }
+            }
+        };
+        var chart = new google.visualization.Histogram(document.getElementById('dwSChart'));
+        chart.draw(data, google.charts.Line.convertOptions(options));
+    }
+
+    function drawDW_H() {
+        var dw_h = '{{ house }}';
+        dw_h = dw_h.split(",");
+
+        var d = [];
+
+        d.push(['Congress Member', 'DW-Nominate Score']);
+        for (i = 0; i < dw_h.length / 2; i++) {
+            d.push([dw_h[2 * i], parseFloat(dw_h[2 * i + 1])]);
+        }
+        var data = google.visualization.arrayToDataTable(d);
+        var options = {
+            'title': 'House DW-Nominate Scores (Left-Right Distribution)', 'legend': { 'position': 'none' }, 'hAxis': {
+                'viewWindow': { 'max': 1.0, 'min': -1.0 }
+            }
+        };
+        var chart = new google.visualization.Histogram(document.getElementById('dwHChart'));
+        chart.draw(data, google.charts.Line.convertOptions(options));
+    }
+
+    function drawDW_All() {
+        var dw_all = '{{ all }}';
+        dw_all = dw_all.split(",");
+
+        var d = [];
+
+        d.push(['Congress Member', 'DW-Nominate Score']);
+        for (i = 0; i < dw_all.length / 2; i++) {
+            d.push([dw_all[2 * i], parseFloat(dw_all[2 * i + 1])]);
+        }
+        var data = google.visualization.arrayToDataTable(d);
+        var options = {
+            'title': 'Congress DW-Nominate Scores (Left-Right Distribution)', 'legend': { 'position': 'none' }, 'hAxis': {
+                'viewWindow': { 'max': 1.0, 'min': -1.0 }
+            }
+        };
+        var chart = new google.visualization.Histogram(document.getElementById('dwAChart'));
+        chart.draw(data, google.charts.Line.convertOptions(options));
+    }
+</script>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/analytics.css') }}">
+    <title>Legislator Examinator</title>
+</head>
+<body class='analytics-page'>
+    <span class='header-row'>
+        <p><a href='/'>Home</a></p>
+        <p><a href='/current_members'>Return to Members Page</a></p>
+    </span>
+    <span class="graph-card">
+        <span class="chart" id="dwSChart"></span>
+    </span>
+    <span class="graph-card">
+        <span class="chart" id="dwHChart"></span>
+    </span>
+    <span class="graph-card">
+        <span class="chart" id="dwAChart"></span>
+    </span>
+</body>
+</html>

@@ -6,7 +6,7 @@ from flask_restful import Resource, Api
 from get_current_members import get_house, get_senators, filter_members, sort_members, get_member
 from get_bills import get_bills, sort_bills
 from get_news import get_news
-from get_data import party_line_data
+from get_data import party_line_data, dw_nominate
 
 app = Flask(__name__)
 CONGRESS_API_KEY = 'fTgijhbaKjHp3PMYYv8lBR45m16pI1pbgdBedAWB'
@@ -97,3 +97,27 @@ def recent_bills():
 
 
     return render_template("recent_bills.html", house_bills=house_bills, senate_bills=senate_bills, sort_by=sort_by)
+
+############# *** THE ANALYTICS PAGE *** #############
+@app.route('/analytics')
+def analytics():
+
+    dw_senate = dw_nominate('Senate')
+    dw_house = dw_nominate('House')
+    dw_all = dw_nominate(None)
+
+    dw_s = ""
+    dw_h = ""
+    dw = ""
+
+    for member in dw_senate:
+        dw_s += member[0] + ","
+        dw_s += str(member[1]) + ","
+    for member in dw_house:
+        dw_h += member[0] + ","
+        dw_h += str(member[1]) + ","
+    for member in dw_all:
+        dw += member[0] + ","
+        dw += str(member[1]) + ","
+
+    return render_template("analytics.html", senate=dw_s, house=dw_h, all=dw)
