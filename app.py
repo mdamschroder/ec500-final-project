@@ -46,6 +46,7 @@ def member_info(id=None):
     name = info['first_name'] + ' ' + info['last_name']
     headlines = get_news(name)
     headlines = headlines['articles'][0:3]
+
     # Collect voting data for party line voting graph
     all_members = party_line_data(info['roles'][len(info['roles']) - 1]['congress'], None)
     party_members =  party_line_data(info['roles'][len(info['roles']) - 1]['congress'], info['current_party'])
@@ -61,7 +62,15 @@ def member_info(id=None):
             i += 1
     data = data[:len(data) - 1]
 
-    return render_template("member.html", info=info, votes=data, len=len(info['roles']), headlines=headlines)
+    # Collect dw_nominate data
+    dw = ""
+    for role in info['roles']:
+        if 'dw_nominate' in role and role['dw_nominate']:
+            dw+=role['congress'] + ','
+            dw+=str(role['dw_nominate']) + ','
+    dw = dw[:len(dw) - 1]
+
+    return render_template("member.html", info=info, votes=data, len=len(info['roles']), headlines=headlines, dw=dw)
 
 ############# *** THE BILLS PAGE *** #############
 @app.route('/get_bills')

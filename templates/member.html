@@ -5,6 +5,7 @@
     google.charts.load('current', { 'packages': ['corechart', 'Line'] });
     google.charts.setOnLoadCallback(drawPieChart);
     google.charts.setOnLoadCallback(drawLineChart);
+    google.charts.setOnLoadCallback(drawDW);
 
     // Draw the chart and set the chart values
     function drawPieChart() {
@@ -48,11 +49,30 @@
         for (i = 0; i < votes.length / 4; i++) {
             d.push([parseInt(votes[4 * i]), parseFloat(votes[4 * i + 1]), parseFloat(votes[4 * i + 2]), parseFloat(votes[4 * i + 3])]);
         }
-        console.log(d);
         data.addRows(d);
         var options = { 'title': 'Party Line Voting Across All Sessions', 'width': 900, 'height': 500 };
         var chart = new google.charts.Line(document.getElementById('lineChart'));
         chart.draw(data, google.charts.Line.convertOptions(options));
+    }
+
+    function drawDW() {
+        var dw = '{{ dw }}';
+        dw = dw.split(",");
+
+        var name = '{{ info.first_name }}' + ' ' + '{{ info.last_name }}'
+        var data = new google.visualization.DataTable();
+        var d = [];
+
+        data.addColumn('number', 'Session of Congress');
+        data.addColumn('number', name);
+        for (i = 0; i < dw.length / 2; i++) {
+            d.push([parseInt(dw[2 * i]), parseFloat(dw[2 * i + 1])]);
+        }
+        data.addRows(d);
+        var options = { 'title': 'DW-Nominate Across All Sessions', 'width': 900, 'height': 500 };
+        var chart = new google.charts.Line(document.getElementById('dwChart'));
+        chart.draw(data, google.charts.Line.convertOptions(options));
+
     }
 </script>
 <head>
@@ -120,6 +140,6 @@
     </span>
     <div class='chart' id="pieChart"></div>
     <div class='chart' id="lineChart"></div>
-
+    <div class="chart" id="dwChart"></div>
 </body>
 </html>

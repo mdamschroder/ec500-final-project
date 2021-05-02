@@ -1,8 +1,22 @@
 from get_current_members import get_house, get_senators, get_member
-
+import threading
 
 CURRENT_SESSION = 117
-all_members = None
+all_senators = []
+all_reps = []
+
+# Get all senators info
+def get_all_senators():
+    global all_senators
+
+    if len(all_senators) == 0:
+
+        senators = get_senators()
+        senators = senators[0]['members']
+
+        for senator in senators:
+            all_senators.append(get_member(senator['id']))
+
 
 # Returns party line voting percentage for given party
 def party_line_data(session, party):
@@ -11,16 +25,8 @@ def party_line_data(session, party):
     if not isinstance(session, int):
         session = int(session)
 
-    if not all_members:
-        # Get all congress members
-        members = get_house()
-        members = members[0]['members']
-        senators = get_senators()
-        members = senators[0]['members']
-    
-        all_members = []
-        for member in members:
-            all_members.append(get_member(member['id']))
+    if not all_senators:
+        get_all_senators()
 
     data = []
     for i in range(CURRENT_SESSION - session + 1):
@@ -28,7 +34,7 @@ def party_line_data(session, party):
 
     # Compile data
     for congress in data:
-        for member in all_members:
+        for member in all_senators:
             if party:
                 if member['current_party'] != party:
                     continue
@@ -42,3 +48,24 @@ def party_line_data(session, party):
         congress.remove(congress[2])
 
     return [i for i in reversed(data)]
+
+
+# Returns dw nominate scores for specified chamber
+def dw_nominate(chamber):
+
+    global all_members
+
+    if chamber == "House":
+        members = get_house()[0]['members']
+    elif chamber == "Senate":
+        members = get_senators()[0]['members']
+    else:
+        members = get_house()[0]['members']
+        members += get_senators()[0]['members']
+
+    data = []
+    for member in members:
+        if 'dw_nominate' in member and member['dw_nominate']:
+            data.append([member['first_name'] + ' ' + member['last_name'], member['dw_nominate']])
+
+    return data
