@@ -37,9 +37,18 @@
 
         data.addColumn('number', 'Session of Congress');
         data.addColumn('number', name);
-        for (i = 0; i < votes.length / 2; i++) {
-            d.push([parseInt(votes[2*i]), parseFloat(votes[2*i+1])])
+        data.addColumn('number', 'All Congress Members');
+        if ('{{ info.current_party }}' == 'R')
+            data.addColumn('number', 'All Republicans');
+        else if ('{{ info.current_party }}' == 'D')
+            data.addColumn('number', 'All Democrats');
+        else
+            data.addColumn('number', 'All Party Members');
+
+        for (i = 0; i < votes.length / 4; i++) {
+            d.push([parseInt(votes[4 * i]), parseFloat(votes[4 * i + 1]), parseFloat(votes[4 * i + 2]), parseFloat(votes[4 * i + 3])]);
         }
+        console.log(d);
         data.addRows(d);
         var options = { 'title': 'Party Line Voting Across All Sessions', 'width': 900, 'height': 500 };
         var chart = new google.charts.Line(document.getElementById('lineChart'));

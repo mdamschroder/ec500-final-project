@@ -6,6 +6,7 @@ from flask_restful import Resource, Api
 from get_current_members import get_house, get_senators, filter_members, sort_members, get_member
 from get_bills import get_bills, sort_bills
 from get_news import get_news
+from get_data import party_line_data
 
 app = Flask(__name__)
 CONGRESS_API_KEY = 'fTgijhbaKjHp3PMYYv8lBR45m16pI1pbgdBedAWB'
@@ -46,13 +47,18 @@ def member_info(id=None):
     headlines = get_news(name)
     headlines = headlines['articles'][0:3]
     # Collect voting data for party line voting graph
-    data = "";
+    all_members = party_line_data(info['roles'][len(info['roles']) - 1]['congress'], None)
+    party_members =  party_line_data(info['roles'][len(info['roles']) - 1]['congress'], info['current_party'])
+    data = ""
+
+    i = 0
     for role in info['roles']:
         if 'votes_with_party_pct' in role:
-            data+=role['congress']
-            data+=','
-            data+=str(role['votes_with_party_pct'])
-            data+=','
+            data+=role['congress'] + ','
+            data+=str(role['votes_with_party_pct']) + ','
+            data+=str(all_members[i][1]) + ','
+            data+=str(party_members[i][1]) + ','
+            i += 1
     data = data[:len(data) - 1]
 
     return render_template("member.html", info=info, votes=data, len=len(info['roles']), headlines=headlines)
