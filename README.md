@@ -6,6 +6,7 @@ This repository contains a web application, programmed in Python and configured 
  - Flask
  - [congress-api](https://projects.propublica.org/api-docs/congress-api/)
  - [newsapi](https://newsapi.org/)
+ - [Images of Congress](https://github.com/unitedstates/images)
  - Python package for CI / CD using unittest and coverage
 
 
@@ -20,3 +21,49 @@ This repository contains a web application, programmed in Python and configured 
 - Can provide 3 top headlines for each member.
 - Can list all recent, active bills for senate and house. List of bills can also be sorted and filtered.
 - Can provide an analytics page with various graphs depicting Congress members on the political spectrum.
+
+## Screenshots:
+
+Below are images of the web application while it's being used.
+
+### Home Page
+
+![](https://github.com/mdamschroder/ec500-final-project/blob/main/images/home.PNG?raw=true)
+
+### Congress Members
+
+This is the top of the list of current members that is provided when you select the "Current Congress" option from the home screen.
+
+![](https://github.com/mdamschroder/ec500-final-project/blob/main/images/members_default.PNG?raw=true)
+
+Congress members can be filtered and sorted. You can filter by party and/or state. Sorting options include sorting by: last name, party, age, percentage of votes along party line, percentage of votes missed, and seniority. The image below depicts the members list after it has been filtered by state (PA) and sorted by age. 
+
+![](https://github.com/mdamschroder/ec500-final-project/blob/main/images/members_filtered.PNG?raw=true)
+
+### Member Page
+
+Clicking on a Congress members name takes you to a page with more information about that member. 
+
+![](https://github.com/mdamschroder/ec500-final-project/blob/main/images/member_1.PNG?raw=true)
+![](https://github.com/mdamschroder/ec500-final-project/blob/main/images/member_2.PNG?raw=true)
+![](https://github.com/mdamschroder/ec500-final-project/blob/main/images/member_3.PNG?raw=true)
+![](https://github.com/mdamschroder/ec500-final-project/blob/main/images/member_4.PNG?raw=true)
+
+### Recent Bills
+
+Selecting the "Recent Bills" option on the home screen will take you to a list of the 20 most recently acted upon bills in the House and Senate. 
+
+![](https://github.com/mdamschroder/ec500-final-project/blob/main/images/bills.PNG?raw=true)
+
+The lists can be filtered by the party that introduced them and sorted by latest major action date, party, committee, or date introduced. The list below has been sorted by committee.
+
+![](https://github.com/mdamschroder/ec500-final-project/blob/main/images/bills_house_sorted.PNG?raw=true)
+
+### Analytics
+
+Selecting the "Analytics" button on the home screen takes you to the analytics page where graphical data about all Congress members and their place on the political spectrum is displayed.
+
+![](https://github.com/mdamschroder/ec500-final-project/blob/main/images/analytics_1.PNG?raw=true)
+
+![](https://github.com/mdamschroder/ec500-final-project/blob/main/images/analytics_2.PNG?raw=true)
+
