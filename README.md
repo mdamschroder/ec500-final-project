@@ -42,7 +42,7 @@ Congress members can be filtered and sorted. You can filter by party and/or stat
 
 ### Member Page
 
-Clicking on a Congress members name takes you to a page with more information about that member. 
+Clicking on a Congress member's name takes you to a page with more information about that member. Note: Screenshots below are taken from two different member pages (Alexandria Ocasio-Cortez and Cory Booker).
 
 ![](https://github.com/mdamschroder/ec500-final-project/blob/main/images/member_1.PNG?raw=true)
 ![](https://github.com/mdamschroder/ec500-final-project/blob/main/images/member_2.PNG?raw=true)
