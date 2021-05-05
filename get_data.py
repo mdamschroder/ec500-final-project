@@ -53,8 +53,6 @@ def party_line_data(session, party):
 # Returns dw nominate scores for specified chamber
 def dw_nominate(chamber):
 
-    global all_members
-
     if chamber == "House":
         members = get_house()[0]['members']
     elif chamber == "Senate":
@@ -67,5 +65,33 @@ def dw_nominate(chamber):
     for member in members:
         if 'dw_nominate' in member and member['dw_nominate']:
             data.append([member['first_name'] + ' ' + member['last_name'], member['dw_nominate']])
+
+    return data
+
+
+# Returns seniority and dw-nominate data for all congress members
+def seniority_data():
+
+    members = get_house()[0]['members']
+    members += get_senators()[0]['members']
+
+    data = []
+    for member in members:
+        if 'seniority' in member and member['seniority'] and 'dw_nominate' in member and member['dw_nominate']:
+            data.append([member['first_name'] + ' ' + member['last_name'], member['dw_nominate'], member['seniority']])
+
+    return data
+
+
+# Returns party-line voting and dw-nominate data for all congress members
+def dw_line_data():
+
+    members = get_house()[0]['members']
+    members += get_senators()[0]['members']
+
+    data = []
+    for member in members:
+        if 'votes_with_party_pct' in member and member['votes_with_party_pct'] and 'dw_nominate' in member and member['dw_nominate']:
+            data.append([member['first_name'] + ' ' + member['last_name'], member['dw_nominate'], member['votes_with_party_pct']])
 
     return data

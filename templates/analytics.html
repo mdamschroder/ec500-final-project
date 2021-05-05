@@ -2,10 +2,12 @@
 <html lang="en">
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-    google.charts.load('current', { 'packages': ['corechart', 'Line'] });
+    google.charts.load('current', { 'packages': ['corechart', 'Line', 'scatter'] });
     google.charts.setOnLoadCallback(drawDW_S);
     google.charts.setOnLoadCallback(drawDW_H);
     google.charts.setOnLoadCallback(drawDW_All);
+    google.charts.setOnLoadCallback(drawDW_Seniority);
+    google.charts.setOnLoadCallback(drawDW_Voting);
     function drawDW_S() {
         var dw_s = '{{ senate }}';
         dw_s = dw_s.split(",");
@@ -65,6 +67,60 @@
         var chart = new google.visualization.Histogram(document.getElementById('dwAChart'));
         chart.draw(data, google.charts.Line.convertOptions(options));
     }
+
+    function drawDW_Seniority() {
+        var seniority = '{{ seniority }}';
+        seniority = seniority.split(",");
+
+        var d = [];
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'DW-Nominate Score');
+        data.addColumn('number', 'Seniority');
+
+        for (i = 0; i < seniority.length / 3; i++) {
+            d.push([parseFloat(seniority[3 * i + 1]), parseFloat(seniority[3 * i + 2])]);
+        }
+        data.addRows(d);
+        var options = {
+            'legend': 'none',
+            'chart': {
+                'title': 'DW Nominate Score vs Seniority',
+            },
+            'height': 400,
+            'hAxis': { 'title': 'DW-Nominate Score' },
+            'vAxis': { 'title': 'Seniority' },
+        };
+
+        var chart = new google.charts.Scatter(document.getElementById('dwSenChart'));
+        chart.draw(data, google.charts.Scatter.convertOptions(options));
+    }
+
+    function drawDW_Voting() {
+        var voting = '{{ party_line }}';
+        voting = voting.split(",");
+
+        var d = [];
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', 'DW-Nominate Score');
+        data.addColumn('number', 'Party-Line Voting');
+
+        for (i = 0; i < voting.length / 3; i++) {
+            d.push([parseFloat(voting[3 * i + 1]), parseFloat(voting[3 * i + 2])]);
+        }
+        data.addRows(d);
+        var options = {
+            'legend': 'none',
+            'chart': {
+                'title': 'DW Nominate Score vs Party-Line Voting',
+            },
+            'height': 400,
+            'hAxis': { 'title': 'DW-Nominate Score' },
+            'vAxis': { 'title': 'Party-Line Voting' },
+        };
+
+        var chart = new google.charts.Scatter(document.getElementById('dwVoteChart'));
+        chart.draw(data, google.charts.Scatter.convertOptions(options));
+    }
 </script>
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/analytics.css') }}">
@@ -82,6 +138,12 @@
     </span>
     <span class="graph-card">
         <span class="chart" id="dwAChart"></span>
+    </span>
+    <span class="graph-card">
+        <span class="chart" id="dwSenChart"></span>
+    </span>
+    <span class="graph-card">
+        <span class="chart" id="dwVoteChart"></span>
     </span>
 </body>
 </html>

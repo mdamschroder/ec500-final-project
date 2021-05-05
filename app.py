@@ -6,7 +6,7 @@ from flask_restful import Resource, Api
 from get_current_members import get_house, get_senators, filter_members, sort_members, get_member
 from get_bills import get_bills, sort_bills
 from get_news import get_news
-from get_data import party_line_data, dw_nominate
+from get_data import party_line_data, dw_nominate, seniority_data, dw_line_data
 
 app = Flask(__name__)
 CONGRESS_API_KEY = 'fTgijhbaKjHp3PMYYv8lBR45m16pI1pbgdBedAWB'
@@ -109,6 +109,8 @@ def analytics():
     dw_s = ""
     dw_h = ""
     dw = ""
+    dw_sen = ""
+    dw_vote = ""
 
     for member in dw_senate:
         dw_s += member[0] + ","
@@ -120,4 +122,16 @@ def analytics():
         dw += member[0] + ","
         dw += str(member[1]) + ","
 
-    return render_template("analytics.html", senate=dw_s, house=dw_h, all=dw)
+    seniority = seniority_data()
+    for member in seniority:
+        dw_sen += member[0] + ","
+        dw_sen += str(member[1]) + ","
+        dw_sen += str(member[2]) + ","
+
+    party_line = dw_line_data()
+    for member in party_line:
+        dw_vote += member[0] + ","
+        dw_vote += str(member[1]) + ","
+        dw_vote += str(member[2]) + ","
+
+    return render_template("analytics.html", senate=dw_s, house=dw_h, all=dw, seniority=dw_sen, party_line=dw_vote)
